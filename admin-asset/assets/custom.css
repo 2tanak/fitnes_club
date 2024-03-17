@@ -1,0 +1,42 @@
+.form-group{
+    margin-bottom: 10px;
+}
+.m_p_0{
+    padding-bottom: 10px;
+}
+.panel-heading{
+    padding-top: 10px !important;
+    padding-bottom: 5px !important;
+}
+.panel-body{
+    padding-bottom: 10px;
+}
+.pre_show_modal{
+    padding: 5px 10px;
+}
+.footable>tbody>tr:hover{
+    background: #a2d1f3;
+}
+.form-group label {
+    color: #999999;
+}
+.footable-last-visible{
+    padding: 5px 20px !important;
+    text-align: right;
+}
+.footable-last-visible>.btn-group{        
+    min-width: 79px;
+}
+.footable-last-visible>.btn-group>.btn{    
+    width: 100%;
+}
+.footable-header{
+    background: #3f51b5;
+    color: #fff;
+}
+.footable-header .btn {
+    background: #fff;
+    color: #3f51b5;
+    border-color: #3f51b5;
+    font-weight: 600;
+}

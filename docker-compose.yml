@@ -1,0 +1,96 @@
+version: '3.2'
+services:
+  nginx:
+    build:
+      context: ./docker/nginx
+    container_name: nginx
+    volumes:
+      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/var/www/app
+      - ./docker/ssl:/etc/nginx/ssl
+      #- ./certbot/conf:/etc/letsencrypt
+      #- ./certbot/www:/var/www/certbot
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    depends_on:
+      - php-fpm
+    # certbot:
+    #image: certbot/certbot:latest
+    # volumes:
+    #  - ./certbot/www/:/var/www/certbot/:rw
+    # - ./certbot/conf/:/etc/letsencrypt/:rw
+    ## - "backend_network"
+    #command: certonly --webroot -w /var/www/certbot --force-renewal --email ${EMAIL} -d ${DOMAIN} --agree-tos
+    # entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/app
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysql"
+      - "REDIS_PORT=6379"
+      - "REDIS_HOST=redis"
+    depends_on:
+      - mysql
+    container_name: php-fpm
+
+  php-cli:
+    build:
+      context: ./
+      dockerfile: docker/php-cli.docker
+    volumes:
+      - ./app:/var/www/app
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysql"
+      - "COMPOSER_MEMORY_LIMIT=-1"
+    depends_on:
+      - mysql
+    tty: true
+
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8.0
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+      - "MYSQL_USER=${DB_USERNAME}"
+      - "MYSQL_PASSWORD=${DB_PASSWORD}"
+      - "MYSQL_DATABASE=${DB_DATABASE}"
+    ports:
+      - "33061:3306"
+    container_name: mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+      #- PMA_USER=user
+      #- PMA_PASSWORD=secret
+      #- UPLOAD_LIMIT=64M
+      - PMA_ARBITRARY=1
+
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - 8081:80
+
+  node:
+    image: node:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/var/www/app
+    working_dir: /var/www/app
+    tty: true
+    container_name: node
