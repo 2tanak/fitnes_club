@@ -13,7 +13,7 @@ services:
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
     ports:
       - "80:80"
-      - "443:443"
+      #- "443:443"
     restart: always
     depends_on:
       - php-fpm
@@ -86,9 +86,10 @@ services:
       - 8081:80
 
   node:
-    image: node:latest
+    image: node:20.0.0
     ports:
       - "3000:3000"
+      - "5173:5173"
     volumes:
       - ./app:/var/www/app
     working_dir: /var/www/app

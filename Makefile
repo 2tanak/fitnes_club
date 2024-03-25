@@ -2,7 +2,7 @@ build:
 	make clear
 	make down
 	docker-compose up -d --build
-	make install
+	#make install
 
 install:
 	make composer
@@ -83,6 +83,12 @@ nadmind:
 	make clear
 	docker exec node npm run dev --prefix Modules/Admin
 	docker exec node cp ./.vite/manifest.json ./ --prefix Public/build-admin
+
+npmgrafika:
+	make clear
+	docker exec node npm i --prefix Modules/Grafika
+	docker exec node npm run dev --prefix Modules/Grafika
+
 
 npm:
 	make clear

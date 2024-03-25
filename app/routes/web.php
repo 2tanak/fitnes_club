@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/vue', [App\Http\Controllers\IndexController::class, 'index'])->name('home');

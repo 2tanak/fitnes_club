@@ -18,6 +18,22 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 app.component('example-component', ExampleComponent);
 
+import Test1Component from './components/Test1Component.vue';
+app.component('test1-component', Test1Component);
+
+import Test2Component from './components/Test2Component.vue';
+app.component('test2-component', Test2Component);
+
+import AjaxComponent from './components/AjaxComponent.vue';
+app.component('ajax', AjaxComponent);
+
+import CharlineComponent from './components/CharlineComponent.vue';
+app.component('charsline', CharlineComponent);
+
+import KrugcharComponent from './components/KrugcharComponent.vue';
+app.component('krugChar', KrugcharComponent);
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

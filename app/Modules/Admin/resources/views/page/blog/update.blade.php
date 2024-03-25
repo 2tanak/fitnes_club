@@ -18,7 +18,9 @@
         </div>
     </div>
 
+@php
 
+@endphp
     <div class="col-md-3">
        @include('admin::left_lang',$sys_lang)
     </div>

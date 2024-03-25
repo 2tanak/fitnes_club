@@ -1,5 +1,6 @@
 {
     "Auth": true,
     "Admin": true,
-    "Entity": true
+    "Entity": true,
+    "Grafika": true
 }

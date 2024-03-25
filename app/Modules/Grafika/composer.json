@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/grafika",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Grafika\\": "",
+            "Modules\\Grafika\\App\\": "app/",
+            "Modules\\Grafika\\Database\\Factories\\": "database/factories/",
+            "Modules\\Grafika\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Grafika\\Tests\\": "tests/"
+        }
+    }
+}
